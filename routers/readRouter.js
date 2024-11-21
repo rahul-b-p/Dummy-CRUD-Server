@@ -4,6 +4,7 @@ import { readData } from "../database/index.js";
 
 export const router = Router();
 
+// read all
 router.get('/user', (req, res) => {
     try {
 
@@ -18,6 +19,7 @@ router.get('/user', (req, res) => {
     }
 })
 
+// read by id parameter
 router.get('/user/:username', (req, res) => {
     try {
 
@@ -30,6 +32,28 @@ router.get('/user/:username', (req, res) => {
 
         logger.error(error);
         res.status(401).send('Something went wrong');
+
+    }
+})
+
+// read by query parameters
+router.get('/search-user', (req, res) => {
+    try {
+
+        const key = req.query.key;
+        const data = readData();
+        const result = data.users.filter(user => {
+            // Convert object to localized string and check if it contains the query
+            const locale = "en-US";
+            const localizedString = user.username.toLocaleString(locale) + " " + user.email.toLocaleString(locale);
+            return localizedString.toLowerCase().includes(key.toLowerCase());
+          });
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        logger.error(error);
+        res.status(401).send('Oops! Something went wrong while loading content');
 
     }
 })
