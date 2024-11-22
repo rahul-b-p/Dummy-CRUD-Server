@@ -11,9 +11,9 @@
       "password": "abu@123"
     },
     {
-      "username": "abhi",
-      "email": "abhi@gmail.com",
-      "password": "abhi@123"
+      "username": "abhiram",
+      "email": "abhiram@gmail.com",
+      "password": "abhiram@123"
     },
     {
       "username": "abhi",
@@ -31,14 +31,9 @@
       "password": "binu@123"
     },
     {
-      "username": "abc",
-      "email": "abc@gmail.com",
-      "password": "abc@123"
-    },
-    {
-      "username": "abc",
-      "email": "abc@gmail.com",
-      "password": "abc@123"
+      "username": "sudu",
+      "email": "sudu@gmail.com",
+      "password": "sudu@123"
     }
   ]
 }

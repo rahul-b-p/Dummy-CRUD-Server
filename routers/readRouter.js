@@ -49,7 +49,11 @@ router.get('/search-user', (req, res) => {
             const localizedString = user.username.toLocaleString(locale) + " " + user.email.toLocaleString(locale);
             return localizedString.toLowerCase().includes(key.toLowerCase());
         });
-        res.status(200).json(result);
+        if (result.length>0) {
+            res.status(200).json(result);
+        } else {
+            res.status(404).json('Search Item not Found')
+        }
 
     } catch (error) {
 
