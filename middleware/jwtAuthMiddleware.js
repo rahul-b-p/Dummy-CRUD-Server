@@ -1,20 +1,19 @@
 import jwt from 'jsonwebtoken';
 import { logger } from '../winston/winstonLoggers.js';
 
-export const jwtVerfyUser=(req,res,next)=>{
+export const jwtVerfyUser = (req, res, next) => {
     try {
-    const authToken = JSON.stringify(req.headers.authorization).split(' ')[1];
-    logger.info(authToken);
-    req.payload = {authToken}
-
-    if (authToken) {
+        const authHeader = req.headers.authorization;
+        const authToken = authHeader.split(' ')[1];
+        logger.info(authToken);
+        const jwtResponse = jwt.verify(authToken, process.env.SECRET_KEY);
+        // logger.info(jwtResponse)
+        req.payload =jwtResponse;
         next();
-    } else {
-        res.statusMessage ='Authorization Failed'
-        res.status(401).json('Authorization Failed')
-    }
-    
+
     } catch (error) {
-        res.status(403).json(error)
+        res.statusMessage = 'Authorization Failed'
+        res.status(401).json('Authorization Failed')
+        logger.error(error);
     }
 }

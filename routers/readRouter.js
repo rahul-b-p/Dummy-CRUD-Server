@@ -67,9 +67,9 @@ router.get('/search-user', (req, res) => {
 router.get('/auth-user', jwtVerfyUser, (req, res) => {
     try {
 
-        const { authToken } = req.payload
-        logger.info(authToken)
-        if(authToken){
+        const username = req.payload
+        logger.info(username)
+        if(username){
             const data = readData();
             res.statusMessage ='Authentication Success'
             res.status(200).json(data)
